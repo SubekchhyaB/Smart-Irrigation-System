@@ -1,0 +1,68 @@
+<!-- history.html -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - Smart Irrigation</title>
+    <link rel="stylesheet" href="/static/css/history.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>History of Moisture Readings</h1>
+            <p>View historical sensor data and trends to monitor your irrigation system's performance.</p>
+        </header>
+        
+        <div class="dashboard">
+            <div class="card">
+                <h2>🌤️ Yesterday's Moisture Readings</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Moisture (%)</th>
+                            <th>Pump Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in yesterday_data %}
+                        <tr>
+                            <td>{{ entry.timestamp.strftime('%H:%M:%S') }}</td>
+                            <td>{{ entry.moisture }}</td>
+                            <td>{{ "ON" if entry.pump_status else "OFF" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>📅 Last 7 Days Moisture Trend</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Moisture (%)</th>
+                            <th>Pump Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entry in week_data %}
+                        <tr>
+                            <td>{{ entry.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ entry.moisture }}</td>
+                            <td>{{ "ON" if entry.pump_status else "OFF" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer>
+            <a href="/dashboard" class="btn-back">Back to Dashboard</a>
+        </footer>
+    </div>
+</body>
+</html>
+
