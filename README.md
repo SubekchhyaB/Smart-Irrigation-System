@@ -1,4 +1,4 @@
-# Smart-Irrigation-System
+# smart_irrg
 
 Setup Instructions:
 1. Install Required Packages
